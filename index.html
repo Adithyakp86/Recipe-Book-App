@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Book - Your Culinary Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <h1>Recipe Book</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#recipes" class="nav-link">Recipes</a>
+                    <a href="#add-recipe" class="nav-link">Add Recipe</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="search-toggle" id="searchToggle" aria-label="Search recipes">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Search Bar -->
+            <div class="search-bar" id="searchBar">
+                <input type="text" id="searchInput" placeholder="Search recipes by name, ingredient, or cuisine...">
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">Discover Amazing Recipes</h2>
+                    <p class="hero-subtitle">Your personal collection of delicious recipes from around the world</p>
+                    <button class="btn btn-primary" onclick="document.getElementById('add-recipe').scrollIntoView({behavior: 'smooth'})">
+                        <i class="fas fa-plus"></i> Add Your First Recipe
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recipes Section -->
+        <section class="recipes-section" id="recipes">
+            <div class="container">
+                <div class="section-header">
+                    <h2>My Recipes</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="breakfast">Breakfast</button>
+                        <button class="filter-btn" data-filter="lunch">Lunch</button>
+                        <button class="filter-btn" data-filter="dinner">Dinner</button>
+                        <button class="filter-btn" data-filter="dessert">Dessert</button>
+                    </div>
+                </div>
+                <div class="recipes-grid" id="recipesGrid">
+                    <!-- Recipes will be dynamically inserted here -->
+                </div>
+                <div class="empty-state" id="emptyState">
+                    <i class="fas fa-book-open"></i>
+                    <h3>No recipes yet</h3>
+                    <p>Start adding your favorite recipes to build your collection!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Recipe Section -->
+        <section class="add-recipe-section" id="add-recipe">
+            <div class="container">
+                <h2>Add New Recipe</h2>
+                <form class="recipe-form" id="recipeForm">
+                    <div class="form-group">
+                        <label for="recipeName">
+                            <i class="fas fa-utensils"></i> Recipe Name
+                        </label>
+                        <input type="text" id="recipeName" required placeholder="e.g., Chocolate Chip Cookies">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipeCategory">
+                                <i class="fas fa-tags"></i> Category
+                            </label>
+                            <select id="recipeCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="dessert">Dessert</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipeCuisine">
+                                <i class="fas fa-globe"></i> Cuisine
+                            </label>
+                            <input type="text" id="recipeCuisine" placeholder="e.g., Italian, Mexican">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipeTime">
+                                <i class="fas fa-clock"></i> Prep Time (min)
+                            </label>
+                            <input type="number" id="recipeTime" placeholder="30" min="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeImage">
+                            <i class="fas fa-image"></i> Image URL
+                        </label>
+                        <input type="url" id="recipeImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeIngredients">
+                            <i class="fas fa-list"></i> Ingredients (one per line)
+                        </label>
+                        <textarea id="recipeIngredients" rows="6" required placeholder="2 cups flour&#10;1 cup sugar&#10;3 eggs"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipeInstructions">
+                            <i class="fas fa-tasks"></i> Instructions (one step per line)
+                        </label>
+                        <textarea id="recipeInstructions" rows="8" required placeholder="Step 1: Mix dry ingredients&#10;Step 2: Add wet ingredients&#10;Step 3: Bake at 350°F"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Recipe
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Recipe Modal -->
+    <div class="modal" id="recipeModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modalBody">
+                <!-- Recipe details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Recipe Book</h3>
+                    <p>Your personal culinary companion for discovering and organizing amazing recipes.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#recipes">Recipes</a></li>
+                        <li><a href="#add-recipe">Add Recipe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#recipes" data-filter="breakfast">Breakfast</a></li>
+                        <li><a href="#recipes" data-filter="lunch">Lunch</a></li>
+                        <li><a href="#recipes" data-filter="dinner">Dinner</a></li>
+                        <li><a href="#recipes" data-filter="dessert">Dessert</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Recipe Book. All rights reserved. Made with <i class="fas fa-heart"></i> for food lovers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
